@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./app.css";
 import { dispatch, subscribe } from "./utils/event";
 import { USERS, USERS_RESULT } from "./utils/constants";
+import UserList from "./components/user-list/user-list";
 
 class App extends Component {
   constructor(props) {
@@ -26,20 +27,8 @@ class App extends Component {
     });
   }
 
-  usersToLi(users) {
-    return users.map(u => {
-      return (
-        <li key={u.id}>
-          <a href={u.html_url} target="_blank">
-            <img src={u.avatar_url} />{u.login}
-          </a>
-        </li>
-      );
-    });
-  }
-
   render() {
-    return <ul id="user-grid">{this.usersToLi(this.state.users)}</ul>;
+    return <UserList users={this.state.users} />;
   }
 }
 
