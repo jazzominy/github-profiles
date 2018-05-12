@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import './user-list.css';
+
 class UserList extends Component {
   constructor(props) {
     super(props);
