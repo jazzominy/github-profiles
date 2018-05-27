@@ -1,3 +1,5 @@
-import us from './user-service';
+import userService from './user-service';
+import searchService from "./search-service";
 
-us.init();
+userService.init();
+searchService.init();

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import './user-list.css';
+import "./user-list.css";
 
 class UserList extends Component {
   constructor(props) {
@@ -22,7 +22,11 @@ class UserList extends Component {
   }
 
   render() {
-    return <ul id="user-grid">{this.usersToLi(this.props.users)}</ul>;
+    return (
+      <div className="user-grid-wrapper">
+        <ul id="user-grid">{this.usersToLi(this.props.users)}</ul>
+      </div>
+    );
   }
 }
 

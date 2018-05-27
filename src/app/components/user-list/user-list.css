@@ -1,7 +1,8 @@
 #user-grid {
   list-style: none;
   padding-left: 0;
-  width: 50%;
+  width: 46%;
+  margin: auto;
 }
 
 #user-grid li {
@@ -22,4 +23,8 @@
 #user-grid img {
   display: block;
   width: 100px;
+}
+
+.user-grid-wrapper {
+  display: flex;
 }

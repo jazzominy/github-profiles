@@ -1,0 +1,14 @@
+.search-wrapper {
+  display: flex;
+  flex-grow: 1;
+  margin-bottom: 5px;
+}
+
+.search-wrapper [type=search] {
+  height: 28px;
+  margin: auto;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 215px;
+  padding: 5px;
+}
