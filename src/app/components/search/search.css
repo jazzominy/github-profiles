@@ -1,5 +1,6 @@
 .search-wrapper {
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
   margin-bottom: 5px;
 }
@@ -11,4 +12,12 @@
   border-radius: 3px;
   width: 215px;
   padding: 5px;
+}
+
+.options-wrapper {
+  margin: auto;
+}
+
+.options-wrapper [type=radio] {
+  margin: 5px;
 }

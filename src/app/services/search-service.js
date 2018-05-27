@@ -4,7 +4,8 @@ import "rxjs/operator/switchMap";
 
 import * as event from "../utils/event";
 import {
-  SEARCH_USERS_URL,
+  //SEARCH_USERS_URL,
+  SEARCH_URL,
   SEARCH_USERS_RESULT,
   SET_USER_SEARCH_STREAM,
   USERS_RESULT
@@ -34,15 +35,18 @@ function searchUsers(action) {
 
   searchStream = stream;
 
-  let resultStream = searchStream.switchMap(query => {
-    if(!query || query.length <=3) {
-      return Observable.of([]);
+  let resultStream = searchStream.switchMap(params => {
+    if(!params.query || params.query.length <=3) {
+      return Observable.of({items:[]});
     }
 
-    let url = `${SEARCH_USERS_URL}?q=${query}&type=user`;
+    let url = `${SEARCH_URL}${params.option}?q=${params.query}+in:name,login`;
     let promise = axios.get(url);
     return Observable.fromPromise(promise)
-          .map(resp => resp.data.items)
+          .map(resp => {
+            resp.data.option = params.option;
+            return resp.data;
+          })
           .catch(handleError.bind(null,resultStream,"searchUsers"));
   });
 
@@ -55,7 +59,7 @@ function searchUsers(action) {
 }
 
 function handleError(retryStream,where, err) {
-  console.log(where, err);
+  console.log(`search-service.js -> ${where}()`, err);
   return retryStream;
 }
 

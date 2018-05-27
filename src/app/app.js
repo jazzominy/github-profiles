@@ -5,13 +5,16 @@ import { dispatch, subscribe } from "./utils/event";
 import { USERS, USERS_RESULT } from "./utils/constants";
 import UserList from "./components/user-list/user-list";
 import UserSearchIp from "./components/search/search";
+import RepoList from "./components/repo-list/repo-list";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: []
+      items: []
     };
+
+    this.searchIp = <UserSearchIp />;
 
     subscribe(USERS_RESULT, this.onUsersResult.bind(this));
   }
@@ -24,33 +27,27 @@ class App extends Component {
 
   onUsersResult(action) {
     this.setState({
-      users: action.payload
+      items: action.payload.items,
+      option: action.payload.option
     });
   }
 
   render() {
-    let view = this.renderSearchIp();
+    let view = null;
 
-    if(this.state.users.length) {
-      view = this.renderUserResult();
+    if (this.state.items.length) {
+      view =
+        this.state.option == "users" ? (
+          <UserList users={this.state.items} />
+        ) : (
+          <RepoList repos={this.state.items} />
+        );
     }
 
-    return view;
-  }
-
-  renderSearchIp() {
     return (
       <div>
-        <UserSearchIp />
-      </div>
-    )
-  }
-
-  renderUserResult() {
-    return (
-      <div>
-        <UserSearchIp />
-        <UserList users={this.state.users} />
+        {this.searchIp}
+        {view}
       </div>
     );
   }

@@ -1,0 +1,37 @@
+#repo-grid {
+  list-style: none;
+  padding-left: 0;
+  width: 46%;
+  max-height: 360px;
+  overflow-y: auto;
+  margin: auto;
+}
+
+#repo-grid li {
+  border: 1px solid #a7a7a7;
+  padding: 3px;
+  border-radius: 3px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#repo-grid li h3 {
+  padding: 5px;
+}
+
+#repo-grid li span {
+  display: block;
+  padding: 5px;
+}
+
+/* #repo-grid img {
+  display: block;
+  width: 100px;
+} */
+
+.repo-grid-wrapper {
+  display: flex;
+}

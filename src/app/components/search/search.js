@@ -7,10 +7,15 @@ import { SET_USER_SEARCH_STREAM } from "../../utils/constants";
 class UserSearchIp extends Component {
   textIp;
   searchStream;
+  params;
 
   constructor(props) {
     super(props);
     this.state = {};
+    this.params = {
+      query: "",
+      option: "users"
+    }
   }
 
   setIpRef(ref) {
@@ -19,9 +24,11 @@ class UserSearchIp extends Component {
 
   componentDidMount() {
     if (this.textIp) {
-      this.searchStream = Observable.fromEvent(this.textIp, "keyup")
-        .map(e => e.target.value)
-        //.filter(keyword => keyword && keyword.length > 3);
+      this.searchStream = Observable.fromEvent(this.textIp, "input")
+        .map(e => {
+          this.params.query = e.target.value;
+          return this.params;
+        });
 
       dispatch({
         type: SET_USER_SEARCH_STREAM,
@@ -32,10 +39,18 @@ class UserSearchIp extends Component {
     }
   }
 
+  onOptionChange(e) {
+    this.params.option = e.target.value;
+  }
+
   render() {
     return (
       <div className="search-wrapper">
-        <input type="search" placeholder="Search" ref={this.setIpRef.bind(this)} />
+        <input type="search" placeholder="Search Github" ref={this.setIpRef.bind(this)} />
+        <div className="options-wrapper">
+          <label><input name="search-option" type="radio" value="users" defaultChecked onChange={this.onOptionChange.bind(this)}/>Users</label>
+          <label><input name="search-option" type="radio" value="repositories" onChange={this.onOptionChange.bind(this)}/>Repositories</label>
+        </div>
       </div>
     );
   }
