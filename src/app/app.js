@@ -28,12 +28,14 @@ class App extends Component {
   onUsersResult(action) {
     this.setState({
       items: action.payload.items,
-      option: action.payload.option
+      option: action.payload.option,
+      resultCount: action.payload.total_count
     });
   }
 
   render() {
     let view = null;
+    let count = null;
 
     if (this.state.items.length) {
       view =
@@ -42,11 +44,14 @@ class App extends Component {
         ) : (
           <RepoList repos={this.state.items} />
         );
+
+        count = <div className="result-count">Total result count: {this.state.resultCount}</div>
     }
 
     return (
       <div>
         {this.searchIp}
+        {count}
         {view}
       </div>
     );

@@ -6,9 +6,9 @@
 }
 
 #user-grid li {
-  border: 2px solid #a7a7a7;
+  border: 1.5px solid #a7a7a7;
   padding: 3px;
-  border-radius: 5px;
+  border-radius: 3px;
   display: inline-block;
   text-align: center;
   margin-right: 5px;
