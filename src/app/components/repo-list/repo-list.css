@@ -8,6 +8,7 @@
 }
 
 #repo-grid li {
+  position: relative;
   border: 1px solid #a7a7a7;
   padding: 3px;
   border-radius: 3px;
@@ -22,16 +23,40 @@
   padding: 5px;
 }
 
-#repo-grid li span {
+#desc {
   display: block;
   padding: 5px;
 }
 
-/* #repo-grid img {
-  display: block;
-  width: 100px;
-} */
-
 .repo-grid-wrapper {
   display: flex;
+}
+
+#stats {
+  position: absolute;
+  top: 0;
+  right: 0px;
+}
+
+#stats > div {
+  display: inline-block;
+  padding: 5px;
+}
+
+.star {
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
+}
+
+.fork {
+  background-image: url('../../../assets/fork.png');
+  background-size: 14px;
+  background-repeat: space;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
 }
