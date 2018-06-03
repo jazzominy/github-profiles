@@ -14,7 +14,7 @@ class UserSearchIp extends Component {
     this.state = {};
     this.params = {
       query: "",
-      option: "users"
+      searchType: "users"
     }
   }
 
@@ -40,7 +40,7 @@ class UserSearchIp extends Component {
   }
 
   onOptionChange(e) {
-    this.params.option = e.target.value;
+    this.params.searchType = e.target.value;
   }
 
   render() {

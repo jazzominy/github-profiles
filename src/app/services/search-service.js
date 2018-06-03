@@ -8,7 +8,8 @@ import {
   SEARCH_URL,
   SEARCH_USERS_RESULT,
   SET_USER_SEARCH_STREAM,
-  USERS_RESULT
+  USERS_RESULT,
+  NAVIGATE_SEARCH_RESULTS
 } from "../utils/constants";
 
 let initialized = false;
@@ -21,6 +22,7 @@ let searchStream = null;
 function init() {
   if (!initialized) {
     event.subscribe(SET_USER_SEARCH_STREAM, searchUsers);
+    event.subscribe(NAVIGATE_SEARCH_RESULTS, navigateSearchResults);
 
     initialized = true;
   }
@@ -40,11 +42,13 @@ function searchUsers(action) {
       return Observable.of({items:[]});
     }
 
-    let url = `${SEARCH_URL}${params.option}?q=${params.query}+in:name,login`;
+    let url = `${SEARCH_URL}${params.searchType}?q=${params.query}+in:name,login`;
     let promise = axios.get(url);
     return Observable.fromPromise(promise)
           .map(resp => {
-            resp.data.option = params.option;
+            let links = parsePaginationLinks(resp.headers.link);
+            resp.data.searchType = params.searchType;
+            resp.data.links = links;
             return resp.data;
           })
           .catch(handleError.bind(null,resultStream,"searchUsers"));
@@ -56,6 +60,46 @@ function searchUsers(action) {
       payload: data
     });
   });
+}
+
+function navigateSearchResults(action) {
+  let url = action.payload.url;
+
+  axios.get(url)
+        .then(resp => {
+          let links = parsePaginationLinks(resp.headers.link);
+          resp.data.searchType = action.payload.searchType;
+          resp.data.links = links;
+          event.dispatch({
+            type: USERS_RESULT,
+            payload: resp.data
+          });
+        })
+        .catch(handleError.bind(null,'search-service -> navigateSearchResults()'));
+}
+
+function parsePaginationLinks(linkHeader) {
+  let links = null;
+
+  if(!linkHeader) {
+    return links;
+  }
+
+  links = {};
+  let result = linkHeader.split(",");
+  result.forEach(item => {
+    let parts = item.split("; ");
+    if(parts.length) {
+      let url = parts[0].trim();
+      let rel = parts[1];
+      url = url ? url.substr(1,url.length-2) : "";
+      rel = rel ? rel.match(/rel="(\w+)"/)[1] : "";
+
+      links[rel] = url;
+    }
+  });
+
+  return links;
 }
 
 function handleError(retryStream,where, err) {

@@ -6,6 +6,7 @@ import { USERS, USERS_RESULT } from "./utils/constants";
 import UserList from "./components/user-list/user-list";
 import UserSearchIp from "./components/search/search";
 import RepoList from "./components/repo-list/repo-list";
+import Paginator from "./components/page-navigator/paginator";
 
 class App extends Component {
   constructor(props) {
@@ -19,16 +20,13 @@ class App extends Component {
     subscribe(USERS_RESULT, this.onUsersResult.bind(this));
   }
 
-  componentDidMount() {
-    /* dispatch({
-      type: USERS
-    }); */
-  }
+  componentDidMount() {}
 
   onUsersResult(action) {
     this.setState({
       items: action.payload.items,
-      option: action.payload.option,
+      searchType: action.payload.searchType,
+      links: action.payload.links,
       resultCount: action.payload.total_count
     });
   }
@@ -39,13 +37,18 @@ class App extends Component {
 
     if (this.state.items.length) {
       view =
-        this.state.option == "users" ? (
+        this.state.searchType == "users" ? (
           <UserList users={this.state.items} />
         ) : (
           <RepoList repos={this.state.items} />
         );
 
-        count = <div className="result-count">Total result count: {this.state.resultCount}</div>
+      count = (
+        <div className="result-count">
+          <div className="count">Total result count: {this.state.resultCount}</div>
+          <Paginator links={this.state.links} searchType={this.state.searchType}/>
+        </div>
+      );
     }
 
     return (

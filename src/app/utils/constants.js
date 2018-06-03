@@ -7,3 +7,4 @@ export const USERS = 'get users';
 export const USERS_RESULT = 'users result';
 export const SET_USER_SEARCH_STREAM = 'user search stream';
 export const SEARCH_USERS_RESULT = 'search users result';
+export const NAVIGATE_SEARCH_RESULTS = 'navigate search results';

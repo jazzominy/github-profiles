@@ -1,0 +1,22 @@
+.pagination {
+  position: absolute;
+  right: 16px;
+}
+
+.pagination button {
+  border: 1px solid #ccc;
+  padding: 4px 6px;
+  cursor: pointer;
+  background-color: inherit;
+  font-family: inherit;
+}
+
+.pagination button:first-child {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.pagination button:last-child {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}

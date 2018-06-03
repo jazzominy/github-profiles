@@ -1,5 +1,13 @@
 .result-count {
-  text-align: center;
+  position: relative;
   font-weight: 500;
   margin-bottom: 5px;
+  width: 46%;
+  height: 30px;
+  margin: auto;
+}
+
+.count {
+  position: absolute;
+  top: 2px;
 }
