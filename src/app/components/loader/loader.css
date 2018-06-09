@@ -1,0 +1,50 @@
+/* Loader from https://icons8.com/cssload/en/horizontal-bars */
+
+#loader {
+  position: absolute;
+  width: 48px;
+  height: 16px;
+  margin: auto;
+  left: 1px;
+  right: 1px;
+  top: 13px;
+  left: 185px;
+}
+
+.loader-ball {
+  position: absolute;
+  top: 0;
+  background-color: rgb(0, 0, 0);
+  width: 10px;
+  height: 10px;
+  animation-name: fade;
+  animation-duration: 0.8s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  border-radius: 8px;
+}
+
+#loader-ball-1 {
+  left: 0;
+  animation-delay: 0s;
+}
+
+#loader-ball-2 {
+  left: 12px;
+  animation-delay: 0.15s;
+}
+
+#loader-ball-3 {
+  left: 24px;
+  animation-delay: 0.3s;
+}
+
+@keyframes fade {
+  0% {
+    background-color: rgb(0, 0, 0);
+  }
+
+  100% {
+    background-color: rgb(255, 255, 255);
+  }
+}

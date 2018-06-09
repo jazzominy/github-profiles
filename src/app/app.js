@@ -7,6 +7,7 @@ import UserList from "./components/user-list/user-list";
 import UserSearchIp from "./components/search/search";
 import RepoList from "./components/repo-list/repo-list";
 import Paginator from "./components/page-navigator/paginator";
+import Loader from "./components/loader/loader";
 
 class App extends Component {
   constructor(props) {
@@ -56,6 +57,7 @@ class App extends Component {
         {this.searchIp}
         {count}
         {view}
+        <Loader />
       </div>
     );
   }

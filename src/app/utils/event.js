@@ -1,4 +1,5 @@
 import { Subject } from 'rxjs';
+import { LOADER } from './constants';
 
 let dispatcherMap = {};
 
@@ -24,7 +25,17 @@ function subscribe(eventType, nextFn, errFn = null) {
   return subscription;
 }
 
+function showLoader(value) {
+  dispatch({
+    type: LOADER,
+    payload: {
+      show: value
+    }
+  });
+}
+
 export {
   dispatch,
-  subscribe
+  subscribe,
+  showLoader
 }
