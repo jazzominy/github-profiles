@@ -8,3 +8,4 @@ export const SET_SEARCH_STREAM = 'search stream';
 export const SEARCH_RESULT = 'search result';
 export const NAVIGATE_SEARCH_RESULTS = 'navigate search results';
 export const LOADER = "loader";
+export const NOTIFICATION = "notification";

@@ -7,7 +7,8 @@ import {
   SEARCH_URL,
   SEARCH_RESULT,
   SET_SEARCH_STREAM,
-  NAVIGATE_SEARCH_RESULTS
+  NAVIGATE_SEARCH_RESULTS,
+  NOTIFICATION
 } from "../utils/constants";
 
 let initialized = false;
@@ -122,6 +123,15 @@ function parsePaginationLinks(linkHeader) {
 
 function handleError(retryStream, where, err) {
   console.log(`search-service.js -> ${where}()`, err);
+  event.showLoader(false);
+
+  event.dispatch({
+    type: NOTIFICATION,
+    payload: {
+      message: `${err.message} -> ${err.response.data.message}`,
+      isError: true
+    }
+  })
   return retryStream;
 }
 

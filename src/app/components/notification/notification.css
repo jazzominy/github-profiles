@@ -1,0 +1,23 @@
+/*error and success styles from https://primer.github.io/storybook */
+
+#notification {
+  padding: 3px;
+  border: 1px solid;
+  position: absolute;
+  border-radius: 3px;
+  display: none;
+  right: 5px;
+  max-width: 300px;
+}
+
+#notification.success {
+  color: #165c26;
+  background-color: #dcffe4;
+  border-color: rgba(27, 31, 35, 0.15)
+}
+
+#notification.error {
+  color: #86181d;
+  background-color: #ffdce0;
+  border-color: rgba(27, 31, 35, 0.15);
+}

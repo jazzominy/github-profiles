@@ -8,6 +8,7 @@ import SearchIp from "./components/search/search";
 import RepoList from "./components/repo-list/repo-list";
 import Paginator from "./components/page-navigator/paginator";
 import Loader from "./components/loader/loader";
+import Notification from "./components/notification/notification";
 
 class App extends Component {
   constructor(props) {
@@ -54,6 +55,7 @@ class App extends Component {
 
     return (
       <div>
+        <Notification />
         {this.searchIp}
         {count}
         {view}
