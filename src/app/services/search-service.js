@@ -5,9 +5,8 @@ import "rxjs/operator/switchMap";
 import * as event from "../utils/event";
 import {
   SEARCH_URL,
-  SEARCH_USERS_RESULT,
-  SET_USER_SEARCH_STREAM,
-  USERS_RESULT,
+  SEARCH_RESULT,
+  SET_SEARCH_STREAM,
   NAVIGATE_SEARCH_RESULTS
 } from "../utils/constants";
 
@@ -20,14 +19,14 @@ let searchStream = null;
  */
 function init() {
   if (!initialized) {
-    event.subscribe(SET_USER_SEARCH_STREAM, searchUsers);
+    event.subscribe(SET_SEARCH_STREAM, setSearchStream);
     event.subscribe(NAVIGATE_SEARCH_RESULTS, navigateSearchResults);
 
     initialized = true;
   }
 }
 
-function searchUsers(action) {
+function setSearchStream(action) {
   let stream = action.payload.searchStream;
 
   if (!stream || searchStream) {
@@ -64,13 +63,13 @@ function searchUsers(action) {
         resp.data.links = links;
         return resp.data;
       })
-      .catch(handleError.bind(null, resultStream, "searchUsers"));
+      .catch(handleError.bind(null, resultStream, "setSearchStream"));
   });
 
   resultStream.subscribe(data => {
     event.showLoader(false);
     event.dispatch({
-      type: USERS_RESULT,
+      type: SEARCH_RESULT,
       payload: data
     });
   });
@@ -86,13 +85,17 @@ function navigateSearchResults(action) {
       resp.data.searchType = action.payload.searchType;
       resp.data.links = links;
       event.dispatch({
-        type: USERS_RESULT,
+        type: SEARCH_RESULT,
         payload: resp.data
       });
     })
     .catch(handleError.bind(null, "search-service -> navigateSearchResults()"));
 }
 
+/**
+ * Parses the page navigation links from header
+ * @param {*} linkHeader 
+ */
 function parsePaginationLinks(linkHeader) {
   let links = null;
 

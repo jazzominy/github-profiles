@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 import "./app.css";
 import { dispatch, subscribe } from "./utils/event";
-import { USERS, USERS_RESULT } from "./utils/constants";
+import { USERS, SEARCH_RESULT } from "./utils/constants";
 import UserList from "./components/user-list/user-list";
-import UserSearchIp from "./components/search/search";
+import SearchIp from "./components/search/search";
 import RepoList from "./components/repo-list/repo-list";
 import Paginator from "./components/page-navigator/paginator";
 import Loader from "./components/loader/loader";
@@ -16,14 +16,14 @@ class App extends Component {
       items: []
     };
 
-    this.searchIp = <UserSearchIp />;
+    this.searchIp = <SearchIp />;
 
-    subscribe(USERS_RESULT, this.onUsersResult.bind(this));
+    subscribe(SEARCH_RESULT, this.onSerchResult.bind(this));
   }
 
   componentDidMount() {}
 
-  onUsersResult(action) {
+  onSerchResult(action) {
     this.setState({
       items: action.payload.items,
       searchType: action.payload.searchType,

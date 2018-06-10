@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Observable } from "rxjs";
 import "./search.css";
 import { dispatch } from "../../utils/event";
-import { SET_USER_SEARCH_STREAM } from "../../utils/constants";
+import { SET_SEARCH_STREAM } from "../../utils/constants";
 
-class UserSearchIp extends Component {
+class SearchIp extends Component {
   textIp;
   searchStream;
   params;
@@ -31,7 +31,7 @@ class UserSearchIp extends Component {
         });
 
       dispatch({
-        type: SET_USER_SEARCH_STREAM,
+        type: SET_SEARCH_STREAM,
         payload: {
           searchStream: this.searchStream
         }
@@ -56,4 +56,4 @@ class UserSearchIp extends Component {
   }
 }
 
-export default UserSearchIp;
+export default SearchIp;
