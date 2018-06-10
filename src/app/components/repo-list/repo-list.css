@@ -23,6 +23,12 @@
   padding: 5px;
 }
 
+#repo-grid img {
+  float: left;
+  max-width: 100px;
+  margin-right: 5px;
+}
+
 #desc {
   display: block;
   padding: 5px;

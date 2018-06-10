@@ -12,6 +12,7 @@ class RepoList extends Component {
     return repos.map(r => {
       return (
         <li key={r.id}>
+          <img src={r.owner.avatar_url} />
           <h3>
             <a href={r.html_url} target="_blank" title={r.full_name}>
               {r.full_name}
