@@ -62,13 +62,8 @@ const config = {
         use: [
           {
             loader: "file-loader",
-            /* 
-            * You need to use useRelativePath along with outputPath so that the path generated in styles.css files
-            * are proper. Only using outputPath inserts the physical path of the directory which we do not want
-            */
             options: {
-              useRelativePath: true,
-              outputPath: path.resolve(__dirname, "dist", "assets")
+              outputPath: "dist/assets/"
             }
           }
         ]
