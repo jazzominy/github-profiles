@@ -63,7 +63,7 @@ const config = {
           {
             loader: "file-loader",
             options: {
-              outputPath: "dist/assets/"
+              outputPath: "assets/"
             }
           }
         ]
