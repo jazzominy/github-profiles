@@ -2,9 +2,14 @@
   list-style: none;
   padding-left: 0;
   width: 46%;
-  max-height: 600px;
+  /* max-height: 600px; */
   overflow-y: auto;
   margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 #repo-grid li {
@@ -36,6 +41,8 @@
 
 .repo-grid-wrapper {
   display: flex;
+  position: relative;
+  height: calc(100% - 85px);
 }
 
 #stats {

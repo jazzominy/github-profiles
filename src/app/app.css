@@ -1,3 +1,7 @@
+#root {
+  height: 100%;
+}
+
 .result-count {
   position: relative;
   font-weight: 500;

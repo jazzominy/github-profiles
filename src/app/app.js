@@ -54,7 +54,7 @@ class App extends Component {
     }
 
     return (
-      <div>
+      <div style={{height:'100%'}}>
         <Notification />
         {this.searchIp}
         {count}
