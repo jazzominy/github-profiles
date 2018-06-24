@@ -18,6 +18,7 @@ class Paginator extends Component {
     //Maintain the button order
     if("first" in links) navs.push("first");
     if("prev" in links) navs.push("prev");
+    if("currentPage" in links) navs.push("currentPage");
     if("next" in links) navs.push("next");
     if("last" in links) navs.push("last");
 
@@ -32,6 +33,9 @@ class Paginator extends Component {
 
     if(nav == "first") {
       btn = <button key="2" onClick={handler}>First</button>;
+    }
+    else if(nav == "currentPage") {
+      btn = <span>{url}</span>
     }
     else if(nav == "prev") {
       btn = <button key="3" onClick={handler}>&lt;</button>;

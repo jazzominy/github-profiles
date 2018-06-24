@@ -114,6 +114,13 @@ function parsePaginationLinks(linkHeader) {
       url = url ? url.substr(1, url.length - 2) : "";
       rel = rel ? rel.match(/rel="(\w+)"/)[1] : "";
 
+      if(rel == "next") {
+        links.currentPage = parseInt(url.match(/page=(\d+)/)[1]) - 1;
+      }
+      else if(rel == "prev") {
+        links.currentPage = parseInt(url.match(/page=(\d+)/)[1]) + 1;
+      }
+
       links[rel] = url;
     }
   });

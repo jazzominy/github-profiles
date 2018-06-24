@@ -11,6 +11,13 @@
   font-family: inherit;
 }
 
+.pagination span {
+  border: 1px solid #ccc;
+  padding: 4px 6px;
+  background-color: inherit;
+  font-family: inherit;
+}
+
 .pagination button:first-child {
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
