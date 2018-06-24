@@ -3,6 +3,12 @@
   padding-left: 0;
   width: 46%;
   margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
 }
 
 #user-grid li {
@@ -27,4 +33,6 @@
 
 .user-grid-wrapper {
   display: flex;
+  position: relative;
+  height: calc(100% - 85px);
 }
