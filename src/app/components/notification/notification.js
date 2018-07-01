@@ -20,6 +20,8 @@ class Notification extends Component {
       message: action.payload.message,
       isError: action.payload.isError
     });
+
+    this.hideTimer();
   }
 
   hideTimer() {

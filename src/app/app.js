@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./app.css";
 import { dispatch, subscribe } from "./utils/event";
-import { USERS, SEARCH_RESULT } from "./utils/constants";
+import { SEARCH_RESULT } from "./utils/constants";
 import UserList from "./components/user-list/user-list";
 import SearchIp from "./components/search/search";
 import RepoList from "./components/repo-list/repo-list";

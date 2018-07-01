@@ -19,7 +19,7 @@
   text-align: center;
   margin-right: 5px;
   margin-bottom: 5px;
-  max-width: 110px;
+  max-width: 109px;
   vertical-align: middle;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -32,7 +32,6 @@
 }
 
 .user-grid-wrapper {
-  display: flex;
   position: relative;
   height: calc(100% - 85px);
 }

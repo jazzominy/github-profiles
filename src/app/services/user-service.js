@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import * as event from '../utils/event';
-import { USERS, USERS_URL, USERS_RESULT } from '../utils/constants';
+import { USERS_URL, USER_INFO } from '../utils/constants';
 
 let initialized = false;
 
@@ -11,22 +11,17 @@ let initialized = false;
  */
 function init() {
   if(!initialized) {
-    event.subscribe(USERS,getUsers);
+    event.subscribe(USER_INFO,getUserInfo);
 
     initialized = true;
   }
 }
 
-function getUsers() {
-  let randomOffset = Math.floor(Math.random()*500);
-  return axios.get(USERS_URL + `?since=${randomOffset}`)
-         .then(resp => {
-           event.dispatch({
-             type: USERS_RESULT,
-             payload: resp.data
-           });
-         })
-         .catch(handleError.bind(null,'user-service -> getUsers()'));
+function getUserInfo(action) {
+  let url = `${USERS_URL}/${action.payload.username}`;
+  axios.get(url)
+  .then(action.payload.then)
+  .catch(handleError.bind(null,`getUserInfo() for ${action.payload.username}`));
 }
 
 function handleError(where, err) {

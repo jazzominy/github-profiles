@@ -48,7 +48,7 @@ function setSearchStream(action) {
 
     let url = `${SEARCH_URL}${params.searchType}?q=${
       params.query
-    }+in:name,login+sort:stars-desc`;
+    }+in:name,description,login+sort:stars-desc`;
     let promise = axios.get(url, {
       cancelToken: new CancelToken(function(c) {
         cancel = c;

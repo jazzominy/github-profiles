@@ -35,7 +35,7 @@ class Paginator extends Component {
       btn = <button key="2" onClick={handler}>First</button>;
     }
     else if(nav == "currentPage") {
-      btn = <span>{url}</span>
+      btn = <span key="5">{url}</span>
     }
     else if(nav == "prev") {
       btn = <button key="3" onClick={handler}>&lt;</button>;
