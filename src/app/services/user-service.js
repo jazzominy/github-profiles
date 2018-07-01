@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import * as event from '../utils/event';
-import { USERS_URL, USER_INFO } from '../utils/constants';
+import { USERS_URL, USER_INFO, USER_INFO_RESULT, NOTIFICATION } from '../utils/constants';
 
 let initialized = false;
 
@@ -20,12 +20,25 @@ function init() {
 function getUserInfo(action) {
   let url = `${USERS_URL}/${action.payload.username}`;
   axios.get(url)
-  .then(action.payload.then)
+  .then(resp => {
+    event.dispatch({
+      type: USER_INFO_RESULT,
+      payload: resp
+    })
+  })
   .catch(handleError.bind(null,`getUserInfo() for ${action.payload.username}`));
 }
 
 function handleError(where, err) {
   console.log(where,err);
+
+  event.dispatch({
+    type: NOTIFICATION,
+    payload: {
+      message: `${err.message} -> ${err.response.data.message}`,
+      isError: true
+    }
+  });
 }
 
 export default {

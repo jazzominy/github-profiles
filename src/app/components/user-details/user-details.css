@@ -1,0 +1,41 @@
+#user-details {
+  background-color: #f6f6f7;
+  display: inline-block;
+  border: 1.5px solid #a7a7a7;
+  border-radius: 3px;
+  padding: 5px;
+  margin: auto;
+  width: 27%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 27%;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+#user-details img {
+  float: left;
+  width: 150px;
+  margin-right: 5px;
+}
+
+#info div {
+  line-height: 1.5em;
+}
+
+#info label {
+  font-weight: 500;
+}
+
+.name {
+  font-size: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  right: 5px;
+  top: 0px;
+  font-size: 20px;
+  line-height: 1em;
+  cursor: pointer;
+}

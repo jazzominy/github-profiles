@@ -24,11 +24,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 #user-grid img {
   display: block;
   width: 100px;
+  pointer-events: none;
 }
 
 .user-grid-wrapper {

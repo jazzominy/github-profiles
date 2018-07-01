@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 
-import { dispatch } from "../../utils/event";
-import { USER_INFO } from "../../utils/constants";
-
 class UserCard extends Component {
   state;
 
@@ -10,8 +7,8 @@ class UserCard extends Component {
     let u = this.props.user;
 
     return (
-      <li>
-        <a href={u.html_url} target="_blank">
+      <li data-username={u.login}>
+        <a>
           <img src={u.avatar_url} />
           {u.login}
         </a>
