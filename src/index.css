@@ -15,3 +15,35 @@ body {
   font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: #f6f6f7;
 }
+
+.fadeOut {
+  opacity: .1;
+  animation-name: fadeOut;
+  animation-duration: .3s;
+}
+
+.fadeIn {
+  opacity: 1;
+  animation-name: fadeIn;
+  animation-duration: .3s;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: .1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: .1;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

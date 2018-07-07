@@ -9,7 +9,9 @@ import UserDetails from "../user-details/user-details";
 class UserList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      fadeOut: false
+    };
   }
 
   usersToLi(users) {
@@ -20,10 +22,11 @@ class UserList extends Component {
 
   render() {
     let userInfo = this.state.userInfo ? <UserDetails user={this.state.userInfo} dispose={this.disposeUserInfo.bind(this)}/> : null;
+    let cname = this.state.fadeOut ? "fadeOut" : "fadeIn";
 
     return (
       <div className="user-grid-wrapper">
-        <ul id="user-grid" onClick={this.getUserInfo.bind(this)}>{this.usersToLi(this.props.users)}</ul>
+        <ul id="user-grid" className={cname} onClick={this.getUserInfo.bind(this)}>{this.usersToLi(this.props.users)}</ul>
         {userInfo}
       </div>
     );
@@ -51,13 +54,15 @@ class UserList extends Component {
 
   onUserInfo(action) {
     this.setState({
-      userInfo: action.payload.data
+      userInfo: action.payload.data,
+      fadeOut: true
     })
   }
 
   disposeUserInfo() {
     this.setState({
-      userInfo: null
+      userInfo: null,
+      fadeOut: false
     });
   }
 }

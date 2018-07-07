@@ -5,12 +5,26 @@
   border-radius: 3px;
   padding: 5px;
   margin: auto;
-  width: 27%;
+  width: 30%;
   position: absolute;
   left: 0;
   right: 0;
   top: 27%;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  animation-duration: .5s;
+  animation-name: slideInDown;
+}
+
+@keyframes slideInDown {
+  from {
+    top: 20%;
+    opacity: 0;
+  }
+
+  to {
+    top: 27%;
+    opacity: 1;
+  }
 }
 
 #user-details img {
