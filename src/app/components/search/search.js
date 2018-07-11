@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Observable, Subject } from "rxjs";
+import { Observable } from "rxjs/Observable";
+import { Subject } from "rxjs/Subject";
 import "./search.css";
 import { dispatch } from "../../utils/event";
 import { SET_SEARCH_STREAM } from "../../utils/constants";

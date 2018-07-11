@@ -1,7 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const config = {
   mode: "production",
@@ -18,6 +20,17 @@ const config = {
      * Create another chunk which contains only the webpack runtime
      */
     runtimeChunk: true,
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false // set to true if you want JS source maps
+      }),
+      /**
+       * This minimizes the css
+       */
+      new OptimizeCSSAssetsPlugin({})
+    ],
     splitChunks: {
       /**
        * optimize for all chunks (initial and dynamically loaded)
@@ -31,6 +44,15 @@ const config = {
           test: /node_modules/,
           chunks: "initial"
           /* name: "vendor" */
+        },
+        /**
+         * Extract css in separate file
+         */
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true
         }
       }
     }
@@ -52,10 +74,10 @@ const config = {
        */
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader"
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -75,7 +97,10 @@ const config = {
     new HtmlWebpackPlugin({
       template: "./public/index.html"
     }),
-    new ExtractTextPlugin("styles.[chunkhash].css")
+    new MiniCssExtractPlugin({
+      filename: "[name].css"/* ,
+      chunkFilename: "[id].css" */
+    })
   ]
 };
 
