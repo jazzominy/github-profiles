@@ -1,7 +1,7 @@
 #user-grid {
   list-style: none;
   padding-left: 0;
-  width: 50%;
+  width: 60%;
   margin: auto;
   position: absolute;
   left: 0;
@@ -16,7 +16,6 @@
   padding: 3px;
   border-radius: 3px;
   display: inline-block;
-  /* text-align: center; */
   margin-right: 5px;
   margin-bottom: 5px;
   width: 49%;
@@ -24,7 +23,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  cursor: pointer;
 }
 
 #user-grid img {
@@ -40,8 +38,22 @@
 
 .user-detail div {
   line-height: 1.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .user-detail label {
   font-weight: 500;
+}
+
+.location {
+  background-image: url('../../../assets/location.png');
+  background-size: 15px;
+  background-repeat: space;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
 }

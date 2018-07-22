@@ -12,13 +12,13 @@ class UserCard extends Component {
           <img src={user.avatarUrl} />
           <div className="info">
             <span className="name">
-              {user.name} (<a href={user.html_url} target="_blank">
+              {user.name} (<a href={user.url} target="_blank">
                 {user.login}
               </a>)
             </span>
-            <div>{user.bio}</div>
+            <div title={user.bio}>{user.bio}</div>
             <div>
-              <label>Location: </label>
+              <span className="location"></span>
               {user.location}
             </div>
             <div>

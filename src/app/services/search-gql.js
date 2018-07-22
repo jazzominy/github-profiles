@@ -26,6 +26,8 @@ function init() {
 }
 
 function onSearch(action) {
+  event.showLoader(true);
+
   axios.post(GITHUB_GQL_ENDPOINT,{
     query: `query {
       search(query:"${action.payload.query}",first:30,type:USER) {
@@ -45,6 +47,7 @@ function onSearch(action) {
             avatarUrl,
             bio,
             location,
+            url,
             repositories {
               totalCount
             }
@@ -71,6 +74,7 @@ function onSearch(action) {
       "Authorization": "Bearer 993f5e9ca0bc25caebfe3e81ef1fd095f1ea4900"
     }
   }).then(resp => {
+    event.showLoader(false);
     event.dispatch({
       type: SEARCH_RESULT,
       payload: {
