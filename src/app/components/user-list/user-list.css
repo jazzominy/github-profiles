@@ -1,7 +1,7 @@
 #user-grid {
   list-style: none;
   padding-left: 0;
-  width: 46%;
+  width: 50%;
   margin: auto;
   position: absolute;
   left: 0;
@@ -16,10 +16,10 @@
   padding: 3px;
   border-radius: 3px;
   display: inline-block;
-  text-align: center;
+  /* text-align: center; */
   margin-right: 5px;
   margin-bottom: 5px;
-  max-width: 109px;
+  width: 49%;
   vertical-align: middle;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -28,12 +28,20 @@
 }
 
 #user-grid img {
-  display: block;
-  width: 100px;
-  pointer-events: none;
+  float: left;
+  width: 130px;
+  margin-right: 5px;
 }
 
 .user-grid-wrapper {
   position: relative;
   height: calc(100% - 85px);
+}
+
+.user-detail div {
+  line-height: 1.5em;
+}
+
+.user-detail label {
+  font-weight: 500;
 }

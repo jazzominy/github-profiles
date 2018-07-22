@@ -3,7 +3,7 @@ import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 import "./search.css";
 import { dispatch } from "../../utils/event";
-import { SET_SEARCH_STREAM } from "../../utils/constants";
+import { SET_SEARCH_STREAM, SEARCH } from "../../utils/constants";
 
 class SearchIp extends Component {
   textIp;
@@ -50,6 +50,17 @@ class SearchIp extends Component {
     this.searchTypeSubject.next(this.params);
   }
 
+  onKeyPress(e) {
+    if(e.charCode === 13){
+      dispatch({
+        type: SEARCH,
+        payload: {
+          query: e.target.value
+        }
+      });
+    }
+  }
+
   render() {
     return (
       <div className="search-wrapper">
@@ -57,6 +68,7 @@ class SearchIp extends Component {
           type="search"
           placeholder="Search Github"
           ref={this.setIpRef.bind(this)}
+          onKeyPress={this.onKeyPress.bind(this)}
         />
         <div className="options-wrapper">
           <label>

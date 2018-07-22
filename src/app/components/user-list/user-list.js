@@ -16,7 +16,8 @@ class UserList extends Component {
 
   usersToLi(users) {
     return users.map(u => {
-      return <UserCard key={u.id} user={u}/>
+      //return <UserCard key={u.id} user={u}/>
+      return <UserCard key={u.node.id} user={u.node}/>
     });
   }
 
