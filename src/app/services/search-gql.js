@@ -71,7 +71,7 @@ function onSearch(action) {
     }`
   }, {
     headers: {
-      "Authorization": "Bearer 993f5e9ca0bc25caebfe3e81ef1fd095f1ea4900"
+      "Authorization": "Bearer token"
     }
   }).then(resp => {
     event.showLoader(false);
