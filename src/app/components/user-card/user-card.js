@@ -5,6 +5,8 @@ class UserCard extends Component {
 
   render() {
     let user = this.props.user;
+    
+    if(user.__typename != "User") return null;
 
     return (
       <li>

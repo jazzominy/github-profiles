@@ -39,7 +39,7 @@ class App extends Component {
 
     if (this.state.items.length) {
       view =
-        this.state.searchType == "users" ? (
+        this.state.searchType == "USER" ? (
           <UserList users={this.state.items} />
         ) : (
           <RepoList repos={this.state.items} />

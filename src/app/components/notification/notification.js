@@ -9,7 +9,7 @@ class Notification extends Component {
     super(props);
     this.state = {
       message: "",
-      error: false
+      isError: false
     };
 
     subscribe(NOTIFICATION, this.onNotification.bind(this));
@@ -28,13 +28,13 @@ class Notification extends Component {
     setTimeout(() => {
       this.setState({
         message: "",
-        error: false
+        isError: false
       })
     },5000)
   }
 
   render() {
-    let cname = this.state.error ? "error" : "success";
+    let cname = this.state.isError ? "error" : "success";
     return (
       <div
         id="notification"

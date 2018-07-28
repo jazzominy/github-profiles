@@ -3,7 +3,7 @@ import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 import "./search.css";
 import { dispatch } from "../../utils/event";
-import { SET_SEARCH_STREAM, SEARCH } from "../../utils/constants";
+import { SEARCH } from "../../utils/constants";
 
 class SearchIp extends Component {
   textIp;
@@ -18,7 +18,7 @@ class SearchIp extends Component {
     this.state = {};
     this.params = {
       query: "",
-      searchType: "users"
+      searchType: "USER"
     };
   }
 
@@ -28,35 +28,24 @@ class SearchIp extends Component {
 
   componentDidMount() {
     if (this.textIp) {
-      this.searchStream = Observable.fromEvent(this.textIp, "input").map(e => {
-        this.params.query = e.target.value;
-        return this.params;
-      });
-
-      dispatch({
-        type: SET_SEARCH_STREAM,
-        payload: {
-          searchStream: Observable.merge(
-            this.searchStream,
-            this.searchTypeSubject
-          )
-        }
-      });
+      
     }
   }
 
   onOptionChange(e) {
     this.params.searchType = e.target.value;
-    this.searchTypeSubject.next(this.params);
+    dispatch({
+      type: SEARCH,
+      payload: this.params
+    });
   }
 
   onKeyPress(e) {
     if(e.charCode === 13){
+      this.params.query = e.target.value;
       dispatch({
         type: SEARCH,
-        payload: {
-          query: e.target.value
-        }
+        payload: this.params
       });
     }
   }
@@ -75,7 +64,7 @@ class SearchIp extends Component {
             <input
               name="search-option"
               type="radio"
-              value="users"
+              value="USER"
               defaultChecked
               onChange={this.onOptionChange.bind(this)}
             />Users
@@ -84,7 +73,7 @@ class SearchIp extends Component {
             <input
               name="search-option"
               type="radio"
-              value="repositories"
+              value="REPOSITORY"
               onChange={this.onOptionChange.bind(this)}
             />Repositories
           </label>

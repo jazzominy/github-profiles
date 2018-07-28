@@ -10,7 +10,6 @@ import {
 } from "../utils/constants";
 
 let initialized = false;
-let searchStream = null;
 
 /**
  * This function is called from index.js. Here the listeners are attached for events.
@@ -30,7 +29,7 @@ function onSearch(action) {
 
   axios.post(GITHUB_GQL_ENDPOINT,{
     query: `query {
-      search(query:"${action.payload.query}",first:30,type:USER) {
+      search(query:"${action.payload.query}",first:30,type:${action.payload.searchType}) {
         userCount,
         pageInfo {
           hasNextPage,
@@ -79,7 +78,7 @@ function onSearch(action) {
       type: SEARCH_RESULT,
       payload: {
         items: resp.data.data.search.edges,
-        searchType: "users",
+        searchType: "USER",
         total_count: resp.data.data.search.userCount,
         links: []
       }
@@ -99,7 +98,7 @@ function handleError(where, err) {
       isError: true
     }
   })
-  return retryStream;
+  return Observable.throw(err);
 }
 
 export default {
