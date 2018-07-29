@@ -82,7 +82,7 @@ function onSearch(action) {
     }`
   }, {
     headers: {
-      "Authorization": "Bearer 38f6c1e256532edafb71cdfd7be014b2c2eab6a2"
+      "Authorization": "Bearer token"
     }
   }).then(resp => {
     event.showLoader(false);
