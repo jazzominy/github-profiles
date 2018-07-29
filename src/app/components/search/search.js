@@ -41,8 +41,9 @@ class SearchIp extends Component {
   }
 
   onKeyPress(e) {
+    this.params.query = e.target.value;
+    
     if(e.charCode === 13){
-      this.params.query = e.target.value;
       dispatch({
         type: SEARCH,
         payload: this.params

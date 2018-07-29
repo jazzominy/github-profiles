@@ -11,14 +11,14 @@ class RepoList extends Component {
   reposToLi(repos) {
     return repos.map(r => {
       return (
-        <li key={r.id}>
-          <img src={r.owner.avatar_url} />
+        <li key={r.cursor}>
+          <img src={r.node.owner.avatarUrl} />
           <h3>
-            <a href={r.html_url} target="_blank" title={r.full_name}>
-              {r.full_name}
+            <a href={r.node.url} target="_blank" title={r.node.name}>
+              {r.node.name}
             </a>
           </h3>
-          <span id="desc">{r.description}</span>
+          <span id="desc">{r.node.description}</span>
           <div id="stats">
             <div>
               <span>
@@ -36,11 +36,11 @@ class RepoList extends Component {
                   />
                 </svg>
               </span>
-              <span>{r.stargazers_count}</span>
+              <span>{r.node.stargazers.totalCount}</span>
             </div>
             <div>
               <span className="fork" />
-              <span>{r.forks_count}</span>
+              <span>{r.node.forkCount}</span>
             </div>
           </div>
         </li>

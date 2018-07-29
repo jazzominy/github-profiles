@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Observable } from "rxjs/Observable";
 
 import * as event from "../utils/event";
 import {
@@ -38,39 +37,52 @@ function onSearch(action) {
         edges {
           cursor,
           node {
-            __typename,
+            __typename
             ... on User {
-            id,
-            login,
-            name,
-            avatarUrl,
-            bio,
-            location,
-            url,
-            repositories {
-              totalCount
-            }
-            followers {
-              totalCount
-            },
-            following {
-              totalCount
-            },
-            organizations(first:10) {
-              edges {
-                node {
-                  name
+              id,
+              login,
+              name,
+              avatarUrl,
+              bio,
+              location,
+              url,
+              repositories {
+                totalCount
+              }
+              followers {
+                totalCount
+              },
+              following {
+                totalCount
+              },
+              organizations(first:10) {
+                edges {
+                  node {
+                    name
+                  }
                 }
               }
             }
+            __typename
+            ... on Repository {
+              name,
+              url,
+              description,
+              forkCount,
+              stargazers {
+                totalCount
+              },
+              owner {
+                avatarUrl
+              }
+            }
           }
-        }
         }
       }
     }`
   }, {
     headers: {
-      "Authorization": "Bearer token"
+      "Authorization": "Bearer 38f6c1e256532edafb71cdfd7be014b2c2eab6a2"
     }
   }).then(resp => {
     event.showLoader(false);
@@ -78,7 +90,7 @@ function onSearch(action) {
       type: SEARCH_RESULT,
       payload: {
         items: resp.data.data.search.edges,
-        searchType: "USER",
+        searchType: action.payload.searchType,
         total_count: resp.data.data.search.userCount,
         links: []
       }
