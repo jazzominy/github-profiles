@@ -98,7 +98,6 @@ function handleError(where, err) {
       isError: true
     }
   })
-  return Observable.throw(err);
 }
 
 export default {
