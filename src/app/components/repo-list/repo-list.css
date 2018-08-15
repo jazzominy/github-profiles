@@ -73,3 +73,8 @@
   top: 2px;
   margin-right: 3px;
 }
+
+#owner-info {
+  font-weight: 400;
+  margin-left: 5px;
+}

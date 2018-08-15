@@ -31,6 +31,16 @@
   margin-right: 5px;
 }
 
+#name {
+  font-size: 17px;
+}
+
+#bio {
+  overflow: auto;
+  white-space: normal;
+  max-height: 4.5em;
+}
+
 .user-grid-wrapper {
   position: relative;
   height: calc(100% - 85px);
@@ -38,12 +48,10 @@
 
 .user-detail div {
   line-height: 1.5em;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .user-detail label {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .location {

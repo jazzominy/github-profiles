@@ -5,7 +5,9 @@ import "./repo-list.css";
 class RepoList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      fadeOut: false
+    };
   }
 
   reposToLi(repos) {
@@ -17,6 +19,7 @@ class RepoList extends Component {
             <a href={r.node.url} target="_blank" title={r.node.name}>
               {r.node.name}
             </a>
+            <span id="owner-info">(belongs to <a href={r.node.owner.url} target="_blank">{r.node.owner.login}</a>)</span>
           </h3>
           <span id="desc">{r.node.description}</span>
           <div id="stats">
@@ -49,9 +52,10 @@ class RepoList extends Component {
   }
 
   render() {
+    let cname = this.state.fadeOut ? "fadeOut" : "fadeIn";
     return (
       <div className="repo-grid-wrapper">
-        <ul id="repo-grid">{this.reposToLi(this.props.repos)}</ul>
+        <ul id="repo-grid" className={cname}>{this.reposToLi(this.props.repos)}</ul>
       </div>
     );
   }

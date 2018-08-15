@@ -12,24 +12,22 @@ class UserCard extends Component {
       <li>
         <div className="user-detail">
           <img src={user.avatarUrl} />
-          <div className="info">
-            <span className="name">
+          <div>
+            <span id="name">
               {user.name} (<a href={user.url} target="_blank">
                 {user.login}
               </a>)
             </span>
-            <div title={user.bio}>{user.bio}</div>
+            <div id="bio" title={user.bio}>{user.bio}</div>
             <div>
               <span className="location"></span>
-              {user.location}
+              {user.location ? user.location : "(n/a)"}
             </div>
             <div>
               <label>Followers: </label>
               <span>{user.followers.totalCount}  </span>
               <label>Following: </label>
-              <span>{user.following.totalCount}</span>
-            </div>
-            <div>
+              <span>{user.following.totalCount} </span>
               <label>Repositories: </label>
               <span>{user.repositories.totalCount}</span>
             </div>
