@@ -73,7 +73,9 @@ function onSearch(action) {
                 totalCount
               },
               owner {
-                avatarUrl
+                avatarUrl,
+                login,
+                url
               }
             }
           }
