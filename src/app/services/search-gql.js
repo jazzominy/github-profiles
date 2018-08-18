@@ -12,6 +12,45 @@ import {
 let initialized = false;
 let pageInfo = null;
 let query = "";
+let userFragment = `fragment userFields on User {
+  id,
+  login,
+  name,
+  avatarUrl,
+  bio,
+  location,
+  url,
+  repositories {
+    totalCount
+  }
+  followers {
+    totalCount
+  },
+  following {
+    totalCount
+  },
+  organizations(first:10) {
+    edges {
+      node {
+        name
+      }
+    }
+  }
+}`;
+let repoFragment = `fragment repoFields on Repository {
+  name,
+  url,
+  description,
+  forkCount,
+  stargazers {
+    totalCount
+  },
+  owner {
+    avatarUrl,
+    login,
+    url
+  }
+}`;
 
 /**
  * This function is called from index.js. Here the listeners are attached for events.
@@ -45,50 +84,15 @@ function onSearch(action) {
           cursor,
           node {
             __typename
-            ... on User {
-              id,
-              login,
-              name,
-              avatarUrl,
-              bio,
-              location,
-              url,
-              repositories {
-                totalCount
-              }
-              followers {
-                totalCount
-              },
-              following {
-                totalCount
-              },
-              organizations(first:10) {
-                edges {
-                  node {
-                    name
-                  }
-                }
-              }
-            }
+            ...userFields
             __typename
-            ... on Repository {
-              name,
-              url,
-              description,
-              forkCount,
-              stargazers {
-                totalCount
-              },
-              owner {
-                avatarUrl,
-                login,
-                url
-              }
-            }
+            ...repoFields
           }
         }
       }
-    }`
+    }
+    ${userFragment}
+    ${repoFragment}`
   }, {
     headers: {
       "Authorization": "Bearer token"
@@ -127,50 +131,15 @@ function navigateSearchResults(action) {
           cursor,
           node {
             __typename
-            ... on User {
-              id,
-              login,
-              name,
-              avatarUrl,
-              bio,
-              location,
-              url,
-              repositories {
-                totalCount
-              }
-              followers {
-                totalCount
-              },
-              following {
-                totalCount
-              },
-              organizations(first:10) {
-                edges {
-                  node {
-                    name
-                  }
-                }
-              }
-            }
+            ...userFields
             __typename
-            ... on Repository {
-              name,
-              url,
-              description,
-              forkCount,
-              stargazers {
-                totalCount
-              },
-              owner {
-                avatarUrl,
-                login,
-                url
-              }
-            }
+            ...repoFields
           }
         }
       }
-    }`
+    }
+    ${userFragment}
+    ${repoFragment}`
   }, {
     headers: {
       "Authorization": "Bearer token"
