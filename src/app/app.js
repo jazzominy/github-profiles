@@ -29,7 +29,8 @@ class App extends Component {
       items: action.payload.items,
       searchType: action.payload.searchType,
       links: action.payload.links,
-      resultCount: action.payload.total_count
+      resultCount: action.payload.total_count,
+      pageInfo: action.payload.pageInfo
     });
   }
 
@@ -48,7 +49,7 @@ class App extends Component {
       count = (
         <div className="result-count">
           <div className="count">Total result count: {this.state.resultCount}</div>
-          <Paginator links={this.state.links} searchType={this.state.searchType}/>
+          <Paginator pageInfo={this.state.pageInfo} searchType={this.state.searchType}/>
         </div>
       );
     }

@@ -19,7 +19,7 @@ class RepoList extends Component {
             <a href={r.node.url} target="_blank" title={r.node.name}>
               {r.node.name}
             </a>
-            <span id="owner-info">(belongs to <a href={r.node.owner.url} target="_blank">{r.node.owner.login}</a>)</span>
+            <span id="owner-info">(owner - <a href={r.node.owner.url} target="_blank">{r.node.owner.login}</a>)</span>
           </h3>
           <span id="desc">{r.node.description}</span>
           <div id="stats">

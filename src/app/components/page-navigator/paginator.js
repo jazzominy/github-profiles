@@ -9,26 +9,23 @@ class Paginator extends Component {
     super(props);
   }
 
-  linksToBtns(links) {
-    if(!links) {
+  linksToBtns(pageInfo) {
+    if(!pageInfo) {
       return [];
     }
 
     let navs = [];
-    //Maintain the button order
-    if("first" in links) navs.push("first");
-    if("prev" in links) navs.push("prev");
-    if("currentPage" in links) navs.push("currentPage");
-    if("next" in links) navs.push("next");
-    if("last" in links) navs.push("last");
+    
+    if(pageInfo.hasPreviousPage)navs.push("prev");
+    if(pageInfo.hasNextPage)navs.push("next");
 
     return navs.map(nav => {
-      return this.getBtn(nav,links[nav]);
+      return this.getBtn(nav,"");
     })
   }
 
   getBtn(nav,url) {
-    let handler = this.navigate.bind(this,url);
+    let handler = this.navigate.bind(this,"next");
     let btn = <button key="1" onClick={handler}>&gt;</button>;
 
     if(nav == "first") {
@@ -38,7 +35,7 @@ class Paginator extends Component {
       btn = <span key="5">{url}</span>
     }
     else if(nav == "prev") {
-      btn = <button key="3" onClick={handler}>&lt;</button>;
+      btn = <button key="3" onClick={this.navigate.bind(this,"prev")}>&lt;</button>;
     }
     else if(nav == "last") {
       btn = <button key="4" onClick={handler}>Last</button>;
@@ -48,15 +45,15 @@ class Paginator extends Component {
   }
 
   render() { 
-    let btns = this.linksToBtns(this.props.links);
+    let btns = this.linksToBtns(this.props.pageInfo);
     return <div className="pagination">{btns}</div>;
   }
 
-  navigate(url) {
+  navigate(direction) {
     dispatch({
       type: NAVIGATE_SEARCH_RESULTS,
       payload: {
-        url,
+        direction,
         searchType: this.props.searchType
       }
     })
