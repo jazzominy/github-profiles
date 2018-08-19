@@ -119,7 +119,7 @@ function navigateSearchResults(action) {
   let firstOrLast = action.payload.direction == "prev" ? "last" : "first";
   axios.post(GITHUB_GQL_ENDPOINT,{
     query: `query {
-      search(query:"${query}",${firstOrLast}:30,type:${action.payload.searchType}${direction}) {
+      search(query:"${query}",${firstOrLast}:10,type:${action.payload.searchType}${direction}) {
         userCount,
         pageInfo {
           startCursor,

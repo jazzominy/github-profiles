@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 
 import "./repo-list.css";
+import { dispatch } from "../../utils/event";
+import { NAVIGATE_SEARCH_RESULTS } from "../../utils/constants";
 
 class RepoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fadeOut: false
+      fadeOut: false,
+      //Use state to hold records as we are loading next set on scroll end
+      repos: props.repos
     };
   }
 
@@ -51,11 +55,32 @@ class RepoList extends Component {
     });
   }
 
+  onScroll(e) {
+    let isAtTheEnd = (e.target.scrollHeight - parseInt(e.target.scrollTop)) == (e.target.clientHeight + 1);
+    
+    if(isAtTheEnd) {
+      dispatch({
+        type: NAVIGATE_SEARCH_RESULTS,
+        payload: {
+          direction:"next",
+          searchType: this.props.searchType
+        }
+      });
+    }
+  }
+
+  //Since we need to add newly fetched data to existing list, do it here
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      repos: this.state.repos.concat(nextProps.repos)
+    })
+  }
+
   render() {
     let cname = this.state.fadeOut ? "fadeOut" : "fadeIn";
     return (
       <div className="repo-grid-wrapper">
-        <ul id="repo-grid" className={cname}>{this.reposToLi(this.props.repos)}</ul>
+        <ul id="repo-grid" className={cname} onScroll={this.onScroll.bind(this)}>{this.reposToLi(this.state.repos)}</ul>
       </div>
     );
   }

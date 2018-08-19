@@ -34,6 +34,11 @@ class SearchIp extends Component {
 
   onOptionChange(e) {
     this.params.searchType = e.target.value;
+    
+    if(!this.params.query) {
+      return;
+    }
+
     dispatch({
       type: SEARCH,
       payload: this.params

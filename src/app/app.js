@@ -41,9 +41,9 @@ class App extends Component {
     if (this.state.items.length) {
       view =
         this.state.searchType == "USER" ? (
-          <UserList users={this.state.items} />
+          <UserList users={this.state.items} searchType={this.state.searchType}/>
         ) : (
-          <RepoList repos={this.state.items} />
+          <RepoList repos={this.state.items} searchType={this.state.searchType}/>
         );
 
       count = (
