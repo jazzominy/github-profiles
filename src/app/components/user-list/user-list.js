@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 import "./user-list.css";
 import UserCard from "../user-card/user-card";
-import { NAVIGATE_SEARCH_RESULTS } from "../../utils/constants";
-import { dispatch } from "../../utils/event";
+import { NAVIGATE_SEARCH_RESULTS, RESET_USER_LIST } from "../../utils/constants";
+import { dispatch, subscribe } from "../../utils/event";
 
 class UserList extends Component {
   constructor(props) {
@@ -22,6 +22,11 @@ class UserList extends Component {
   }
 
   onScroll(e) {
+    //Only entertain scroll event on ul
+    if(e.target !== e.currentTarget) {
+      return;
+    }
+
     let isAtTheEnd = (e.target.scrollHeight - parseInt(e.target.scrollTop)) == (e.target.clientHeight + 1);
     
     if(isAtTheEnd) {
@@ -52,7 +57,15 @@ class UserList extends Component {
     );
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    subscribe(RESET_USER_LIST, this.onReset.bind(this));
+  }
+
+  onReset(action) {
+    this.setState({
+      users: []
+    })
+  }
 }
 
 export default UserList;

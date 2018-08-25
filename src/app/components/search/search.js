@@ -1,20 +1,16 @@
 import React, { Component } from "react";
-import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
 import "./search.css";
 import { dispatch } from "../../utils/event";
-import { SEARCH } from "../../utils/constants";
+import { SEARCH, RESET_USER_LIST, RESET_REPO_LIST } from "../../utils/constants";
 
 class SearchIp extends Component {
   textIp;
   searchStream;
   params;
-  searchTypeSubject;
 
   constructor(props) {
     super(props);
 
-    this.searchTypeSubject = new Subject();
     this.state = {};
     this.params = {
       query: "",
@@ -24,12 +20,6 @@ class SearchIp extends Component {
 
   setIpRef(ref) {
     this.textIp = ref;
-  }
-
-  componentDidMount() {
-    if (this.textIp) {
-      
-    }
   }
 
   onOptionChange(e) {
@@ -49,6 +39,12 @@ class SearchIp extends Component {
     this.params.query = e.target.value;
     
     if(e.charCode === 13){
+      let type = this.params.searchType == 'USER' ? RESET_USER_LIST : RESET_REPO_LIST;
+      
+      dispatch({
+        type 
+      });
+
       dispatch({
         type: SEARCH,
         payload: this.params

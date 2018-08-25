@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 import "./repo-list.css";
-import { dispatch } from "../../utils/event";
-import { NAVIGATE_SEARCH_RESULTS } from "../../utils/constants";
+import { dispatch, subscribe } from "../../utils/event";
+import { NAVIGATE_SEARCH_RESULTS, RESET_REPO_LIST } from "../../utils/constants";
 
 class RepoList extends Component {
   constructor(props) {
@@ -56,6 +56,11 @@ class RepoList extends Component {
   }
 
   onScroll(e) {
+    //Only entertain scroll event on ul
+    if(e.target !== e.currentTarget) {
+      return;
+    }
+    
     let isAtTheEnd = (e.target.scrollHeight - parseInt(e.target.scrollTop)) == (e.target.clientHeight + 1);
     
     if(isAtTheEnd) {
@@ -83,6 +88,16 @@ class RepoList extends Component {
         <ul id="repo-grid" className={cname} onScroll={this.onScroll.bind(this)}>{this.reposToLi(this.state.repos)}</ul>
       </div>
     );
+  }
+
+  componentDidMount() {
+    subscribe(RESET_REPO_LIST, this.onReset.bind(this));
+  }
+
+  onReset(action) {
+    this.setState({
+      repos: []
+    })
   }
 }
 
