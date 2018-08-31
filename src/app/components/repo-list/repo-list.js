@@ -72,9 +72,7 @@ class RepoList extends Component {
   }
 
   onScroll(e) {
-    let isAtTheEnd =
-      parseInt(e.target.scrollHeight - e.target.scrollTop) ==
-      e.target.clientHeight;
+    let isAtTheEnd = parseInt(e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight <= 1;
 
     if (isAtTheEnd) {
       dispatch({
