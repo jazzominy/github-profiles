@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+import { Observable } from "rxjs/Observable";
 
 import "./repo-list.css";
 import { dispatch, subscribe } from "../../utils/event";
-import { NAVIGATE_SEARCH_RESULTS, RESET_REPO_LIST } from "../../utils/constants";
+import {
+  NAVIGATE_SEARCH_RESULTS,
+  RESET_REPO_LIST
+} from "../../utils/constants";
 
 class RepoList extends Component {
+  uLRef;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -12,6 +18,10 @@ class RepoList extends Component {
       //Use state to hold records as we are loading next set on scroll end
       repos: props.repos
     };
+  }
+
+  setUlRef(ref) {
+    this.uLRef = ref;
   }
 
   reposToLi(repos) {
@@ -23,7 +33,13 @@ class RepoList extends Component {
             <a href={r.node.url} target="_blank" title={r.node.name}>
               {r.node.name}
             </a>
-            <span id="owner-info">(owner - <a href={r.node.owner.url} target="_blank">{r.node.owner.login}</a>)</span>
+            <span id="owner-info">
+              (owner -{" "}
+              <a href={r.node.owner.url} target="_blank">
+                {r.node.owner.login}
+              </a>
+              )
+            </span>
           </h3>
           <span id="desc">{r.node.description}</span>
           <div id="stats">
@@ -56,18 +72,15 @@ class RepoList extends Component {
   }
 
   onScroll(e) {
-    //Only entertain scroll event on ul
-    if(e.target !== e.currentTarget) {
-      return;
-    }
-    
-    let isAtTheEnd = (e.target.scrollHeight - parseInt(e.target.scrollTop)) == (e.target.clientHeight + 1);
-    
-    if(isAtTheEnd) {
+    let isAtTheEnd =
+      parseInt(e.target.scrollHeight - e.target.scrollTop) ==
+      e.target.clientHeight;
+
+    if (isAtTheEnd) {
       dispatch({
         type: NAVIGATE_SEARCH_RESULTS,
         payload: {
-          direction:"next",
+          direction: "next",
           searchType: this.props.searchType
         }
       });
@@ -78,26 +91,35 @@ class RepoList extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       repos: this.state.repos.concat(nextProps.repos)
-    })
+    });
   }
 
   render() {
     let cname = this.state.fadeOut ? "fadeOut" : "fadeIn";
     return (
       <div className="repo-grid-wrapper">
-        <ul id="repo-grid" className={cname} onScroll={this.onScroll.bind(this)}>{this.reposToLi(this.state.repos)}</ul>
+        <ul id="repo-grid" className={cname} ref={this.setUlRef.bind(this)}>
+          {this.reposToLi(this.state.repos)}
+        </ul>
       </div>
     );
   }
 
   componentDidMount() {
     subscribe(RESET_REPO_LIST, this.onReset.bind(this));
+    //Debounce the scroll event as it is fired too often.
+    //This avoids accidental multiple api calls.
+    //Also it guarantees that api will be called when list is scrolled till the end
+    let scrollStream = Observable.fromEvent(this.uLRef, "scroll").debounceTime(
+      100
+    );
+    scrollStream.subscribe(this.onScroll.bind(this));
   }
 
   onReset(action) {
     this.setState({
       repos: []
-    })
+    });
   }
 }
 
