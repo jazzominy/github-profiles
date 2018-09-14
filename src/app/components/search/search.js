@@ -5,7 +5,6 @@ import { SEARCH, RESET_USER_LIST, RESET_REPO_LIST } from "../../utils/constants"
 
 class SearchIp extends Component {
   textIp;
-  searchStream;
   params;
 
   constructor(props) {
