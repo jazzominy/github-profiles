@@ -40,15 +40,15 @@ class App extends Component {
     if (this.state.items.length) {
       view =
         this.state.searchType == "users" ? (
-          <UserList users={this.state.items} />
+          <UserList users={this.state.items} searchType={this.state.searchType} links={this.state.links}/>
         ) : (
-          <RepoList repos={this.state.items} />
+          <RepoList repos={this.state.items} searchType={this.state.searchType} links={this.state.links}/>
         );
 
       count = (
         <div className="result-count">
           <div className="count">Total result count: {this.state.resultCount}</div>
-          <Paginator links={this.state.links} searchType={this.state.searchType}/>
+          {/* <Paginator links={this.state.links} searchType={this.state.searchType}/> */}
         </div>
       );
     }

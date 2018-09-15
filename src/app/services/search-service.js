@@ -8,7 +8,8 @@ import {
   SEARCH_RESULT,
   SET_SEARCH_STREAM,
   NAVIGATE_SEARCH_RESULTS,
-  NOTIFICATION
+  NOTIFICATION,
+  RESET_SEARCH_RESULT
 } from "../utils/constants";
 
 let initialized = false;
@@ -43,6 +44,9 @@ function setSearchStream(action) {
       return Observable.of({ items: [] });
     }
 
+    event.dispatch({
+      type: RESET_SEARCH_RESULT
+    })
     //Cancel the previous in-progress request
     if (cancel) cancel();
 

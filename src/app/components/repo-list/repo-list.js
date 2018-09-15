@@ -1,11 +1,26 @@
 import React, { Component } from "react";
+import { Observable } from "rxjs/Observable";
 
 import "./repo-list.css";
+import { NAVIGATE_SEARCH_RESULTS, RESET_SEARCH_RESULT } from "../../utils/constants";
+import { dispatch, subscribe } from "../../utils/event";
 
 class RepoList extends Component {
+  uLRef;
+  subscriptions;
+
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      fadeOut: false,
+      //Use state to hold records as we are loading next set on scroll end
+      repos: props.repos
+    };
+    this.subscriptions = [];
+  }
+
+  setUlRef(ref) {
+    this.uLRef = ref;
   }
 
   reposToLi(repos) {
@@ -49,12 +64,59 @@ class RepoList extends Component {
   }
 
   render() {
+    let cname = this.state.fadeOut ? "fadeOut" : "fadeIn";
     return (
       <div className="repo-grid-wrapper">
-        <ul id="repo-grid">{this.reposToLi(this.props.repos)}</ul>
+        <ul id="repo-grid" className={cname} ref={this.setUlRef.bind(this)}>{this.reposToLi(this.state.repos)}</ul>
       </div>
     );
   }
+
+  componentDidMount() {
+    let sub = subscribe(RESET_SEARCH_RESULT, this.onReset.bind(this));
+    this.subscriptions.push(sub);
+    //Debounce the scroll event as it is fired too often.
+    //This avoids accidental multiple api calls.
+    //Also it guarantees that api will be called when list is scrolled till the end
+    let scrollStream = Observable.fromEvent(this.uLRef, "scroll").debounceTime(
+      100
+    );
+    
+    sub = scrollStream.subscribe(this.onScroll.bind(this));
+    this.subscriptions.push(sub);
+  }
+
+  onScroll(e) {
+    let isAtTheEnd = parseInt(e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight <= 1;
+
+    if (isAtTheEnd && this.props.links && "next" in this.props.links) {
+      dispatch({
+        type: NAVIGATE_SEARCH_RESULTS,
+        payload: {
+          url: this.props.links.next,
+          searchType: this.props.searchType
+        }
+      });
+    }
+  }
+  
+  componentWillUnmount() {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
+
+  //Since we need to add newly fetched data to existing list, do it here
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      repos: this.state.repos.concat(nextProps.repos)
+    });
+  }
+
+  onReset(action) {
+    this.setState({
+      repos: [],
+      fadeOut: false
+    });
+  }  
 }
 
 export default RepoList;

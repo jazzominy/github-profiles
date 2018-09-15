@@ -8,5 +8,6 @@ export const USER_INFO_RESULT = 'user info result';
 export const SET_SEARCH_STREAM = 'search stream';
 export const SEARCH_RESULT = 'search result';
 export const NAVIGATE_SEARCH_RESULTS = 'navigate search results';
+export const RESET_SEARCH_RESULT = 'reset search result';
 export const LOADER = "loader";
 export const NOTIFICATION = "notification";
