@@ -5,7 +5,7 @@
   border-radius: 3px;
   padding: 5px;
   margin: auto;
-  width: 30%;
+  width: 400px;
   position: absolute;
   left: 0;
   right: 0;
@@ -52,4 +52,15 @@
   font-size: 20px;
   line-height: 1em;
   cursor: pointer;
+}
+
+@media (max-width: 420px) {
+  #user-details {
+    top: 10%;
+    min-width: 30%;
+  }
+
+  #user-details img {
+    width: 125px;
+  }
 }

@@ -15,3 +15,52 @@
   position: absolute;
   top: 2px;
 }
+
+#boundary {
+  padding: 3px;
+  background-color: rgba(0, 0, 0, 0.644);
+  border-radius: 15px;
+  width: 70px;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  bottom: -21px;
+  transition-property: bottom;
+  transition-duration: 0.2s;
+}
+
+#ball {
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  background-color: beige;
+  animation-duration: 0.4s;
+  animation-name: backForth;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes backForth {
+  0% {
+    transform: translate(0,0)
+  }
+  
+  100% {
+    transform: translate(50px,0)
+  }
+}
+
+#boundary.slideUp {
+  bottom: 10px;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translate(0,0)
+  }
+  
+  100% {
+    transform: translate(0,-10px)
+  }
+}

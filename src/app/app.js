@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./app.css";
 import { dispatch, subscribe } from "./utils/event";
-import { SEARCH_RESULT } from "./utils/constants";
+import { SEARCH_RESULT, NAVIGATE_SEARCH_RESULTS } from "./utils/constants";
 import UserList from "./components/user-list/user-list";
 import SearchIp from "./components/search/search";
 import RepoList from "./components/repo-list/repo-list";
@@ -10,16 +10,25 @@ import Paginator from "./components/page-navigator/paginator";
 import Loader from "./components/loader/loader";
 import Notification from "./components/notification/notification";
 
+let PageLoader = (props) => {
+  return (
+    <div id="boundary" className={props.show ? 'slideUp':''}>
+      <div id="ball"></div>
+    </div>
+  )
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      showPageLoader: false
     };
 
     this.searchIp = <SearchIp />;
-
     subscribe(SEARCH_RESULT, this.onSerchResult.bind(this));
+    subscribe(NAVIGATE_SEARCH_RESULTS, this.displayPageLoader.bind(this));
   }
 
   componentDidMount() {}
@@ -29,7 +38,8 @@ class App extends Component {
       items: action.payload.items,
       searchType: action.payload.searchType,
       links: action.payload.links,
-      resultCount: action.payload.total_count
+      resultCount: action.payload.total_count,
+      showPageLoader: false
     });
   }
 
@@ -60,8 +70,15 @@ class App extends Component {
         {count}
         {view}
         <Loader />
+        <PageLoader show={this.state.showPageLoader}/>
       </div>
     );
+  }
+
+  displayPageLoader(action) {
+    this.setState({
+      showPageLoader: true
+    })
   }
 }
 

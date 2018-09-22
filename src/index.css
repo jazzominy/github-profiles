@@ -14,6 +14,7 @@ body {
   padding: 5px;
   font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: #f6f6f7;
+  overflow: hidden;
 }
 
 .fadeOut {

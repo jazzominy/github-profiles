@@ -68,7 +68,7 @@ function setSearchStream(action) {
         resp.data.links = links;
         return resp.data;
       })
-      .catch(handleError.bind(null, resultStream, "setSearchStream"));
+      .catch(handleError.bind(null, resultStream, "setSearchStream()"));
   });
 
   resultStream.subscribe(data => {
@@ -94,7 +94,7 @@ function navigateSearchResults(action) {
         payload: resp.data
       });
     })
-    .catch(handleError.bind(null, "search-service -> navigateSearchResults()"));
+    .catch(handleError.bind(null, null, "navigateSearchResults()"));
 }
 
 /**
@@ -133,7 +133,7 @@ function parsePaginationLinks(linkHeader) {
 }
 
 function handleError(retryStream, where, err) {
-  console.log(`search-service.js -> ${where}()`, err);
+  console.log(`search-service.js -> ${where}`, err);
   event.showLoader(false);
 
   event.dispatch({
