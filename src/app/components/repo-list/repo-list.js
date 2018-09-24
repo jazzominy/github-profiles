@@ -25,6 +25,8 @@ class RepoList extends Component {
 
   reposToLi(repos) {
     return repos.map(r => {
+      let starCount = r.stargazers_count > 1000 ? (r.stargazers_count/1000).toFixed(1)+'k' : r.stargazers_count;
+      let forkCount = r.forks_count > 1000 ? (r.forks_count/1000).toFixed(1)+'k' : r.forks_count;
       return (
         <li key={r.id}>
           <img src={r.owner.avatar_url} />
@@ -51,11 +53,11 @@ class RepoList extends Component {
                   />
                 </svg>
               </span>
-              <span>{r.stargazers_count}</span>
+              <span>{starCount}</span>
             </div>
             <div>
               <span className="fork" />
-              <span>{r.forks_count}</span>
+              <span>{forkCount}</span>
             </div>
           </div>
         </li>

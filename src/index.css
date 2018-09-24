@@ -17,6 +17,17 @@ body {
   overflow: hidden;
 }
 
+.fork-me {
+  background-image: url('./assets/fork-me.png');
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: 40px;
+}
+
 .fadeOut {
   opacity: .1;
   animation-name: fadeOut;
@@ -46,5 +57,13 @@ body {
 
   to {
     opacity: 1;
+  }
+}
+
+@media (max-width:420px) {
+  .fork-me {
+    width: 30px;
+    height: 30px;
+    background-size: 30px;
   }
 }

@@ -2,7 +2,6 @@
   list-style: none;
   padding-left: 0;
   width: 46%;
-  /* max-height: 600px; */
   overflow-y: auto;
   margin: auto;
   position: absolute;
@@ -32,6 +31,21 @@
   float: left;
   max-width: 100px;
   margin-right: 5px;
+}
+
+@media (max-width: 500px) {
+  #repo-grid {
+    width: auto;
+  }
+
+  #repo-grid li h3 {
+    position: relative;
+    top: 10px;
+  }
+
+  #repo-grid img {
+    display: none;
+  }
 }
 
 #desc {
