@@ -6,7 +6,8 @@ import {
   SEARCH,
   SEARCH_RESULT,
   NOTIFICATION,
-  NAVIGATE_SEARCH_RESULTS
+  NAVIGATE_SEARCH_RESULTS,
+  TOKEN
 } from "../utils/constants";
 
 let initialized = false;
@@ -95,7 +96,7 @@ function onSearch(action) {
     ${repoFragment}`
   }, {
     headers: {
-      "Authorization": "Bearer 3c335f4e16f8a7b327ff8b4e9001b7764d60e816"
+      "Authorization": `Bearer ${TOKEN}`
     }
   }).then(resp => {
     event.showLoader(false);
@@ -142,7 +143,7 @@ function navigateSearchResults(action) {
     ${repoFragment}`
   }, {
     headers: {
-      "Authorization": "Bearer 3c335f4e16f8a7b327ff8b4e9001b7764d60e816"
+      "Authorization": `Bearer ${TOKEN}`
     }
   }).then(resp => {
     event.showLoader(false);
