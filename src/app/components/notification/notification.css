@@ -8,6 +8,7 @@
   display: none;
   right: 5px;
   max-width: 300px;
+  z-index: 10;
 }
 
 #notification.success {

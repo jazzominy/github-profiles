@@ -47,8 +47,26 @@ class UserList extends Component {
 
   //Since we need to add newly fetched data to existing list, do it here
   componentWillReceiveProps(nextProps) {
+    /**
+     * Since page loader is displayed in app.js for infinite scrolling,
+     * the state of this component is updated with same array of users that are already displayed
+     * So to avoid this update, a check is put
+     */
+    if(this.state.users === nextProps.users) {
+      return;
+    }
+
+    let newSet = nextProps.users;
+    let len = this.state.users.length, i = len;
+
+    //Add existing array of users to new array of users for the above check to work correctly i.e
+    //if nextProps.users is same as last result, dont go ahead with the update
+    while(--i >= 0) {
+      newSet.unshift(this.state.users[i]);
+    }
+
     this.setState({
-      users: this.state.users.concat(nextProps.users)
+      users: newSet
     });
   }
 

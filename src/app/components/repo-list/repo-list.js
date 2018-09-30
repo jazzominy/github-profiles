@@ -87,8 +87,26 @@ class RepoList extends Component {
 
   //Since we need to add newly fetched data to existing list, do it here
   componentWillReceiveProps(nextProps) {
+    /**
+     * Since page loader is displayed in app.js for infinite scrolling,
+     * the state of this component is updated with same array of repos that are already displayed
+     * So to avoid this update, a check is put
+     */
+    if(this.state.repos === nextProps.repos) {
+      return;
+    }
+
+    let newSet = nextProps.repos;
+    let len = this.state.repos.length, i = len;
+
+    //Add existing array of repos to new array of repos for the above check to work correctly i.e
+    //if nextProps.repos is same as last result, dont go ahead with the update
+    while(--i >= 0) {
+      newSet.unshift(this.state.repos[i]);
+    }
+
     this.setState({
-      repos: this.state.repos.concat(nextProps.repos)
+      repos: newSet
     });
   }
 
