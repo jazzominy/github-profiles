@@ -4,6 +4,7 @@ export const USER_URL = BASE_URL + 'user';
 export const SEARCH_URL = BASE_URL + 'search/';
 
 export const GITHUB_GQL_ENDPOINT = "https://api.github.com/graphql";
+export const TOKEN = "";
 
 export const USER_INFO = 'user info';
 export const USER_INFO_RESULT = 'user info result';

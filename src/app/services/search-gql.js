@@ -95,7 +95,7 @@ function onSearch(action) {
     ${repoFragment}`
   }, {
     headers: {
-      "Authorization": "Bearer token"
+      "Authorization": "Bearer 3c335f4e16f8a7b327ff8b4e9001b7764d60e816"
     }
   }).then(resp => {
     event.showLoader(false);
@@ -142,7 +142,7 @@ function navigateSearchResults(action) {
     ${repoFragment}`
   }, {
     headers: {
-      "Authorization": "Bearer token"
+      "Authorization": "Bearer 3c335f4e16f8a7b327ff8b4e9001b7764d60e816"
     }
   }).then(resp => {
     event.showLoader(false);
