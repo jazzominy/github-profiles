@@ -51,7 +51,9 @@ const config = {
   devServer: {
     contentBase: "./public",
     watchContentBase: true,
-    port: 8080
+    //Using host with 0.0.0.0 value allows access to app from other devices using local ip address
+    host: '0.0.0.0',
+    port: 3030
   }
 };
 
