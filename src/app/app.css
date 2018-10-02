@@ -5,15 +5,13 @@
 .result-count {
   position: relative;
   font-weight: 500;
-  margin-bottom: 5px;
-  width: 46%;
   height: 30px;
-  margin: auto;
 }
 
 .count {
-  position: absolute;
+  position: relative;
   top: 2px;
+  text-align: center
 }
 
 #boundary {

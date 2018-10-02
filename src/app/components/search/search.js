@@ -17,10 +17,6 @@ class SearchIp extends Component {
     };
   }
 
-  setIpRef(ref) {
-    this.textIp = ref;
-  }
-
   onOptionChange(e) {
     this.params.searchType = e.target.value;
     
@@ -57,7 +53,7 @@ class SearchIp extends Component {
         <input
           type="search"
           placeholder="Search Github"
-          ref={this.setIpRef.bind(this)}
+          ref={ref => this.textIp = ref}
           onKeyPress={this.onKeyPress.bind(this)}
         />
         <div className="options-wrapper">

@@ -33,11 +33,13 @@
   margin-right: 5px;
 }
 
-@media (max-width: 500px) {
+@media (max-width:768px) {
   #repo-grid {
-    width: auto;
+    width: 100%;
   }
+}
 
+@media (max-width: 500px) {
   #repo-grid li h3 {
     position: relative;
     top: 10px;

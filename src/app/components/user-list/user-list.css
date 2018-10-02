@@ -19,7 +19,7 @@
   margin-right: 5px;
   margin-bottom: 5px;
   width: 49%;
-  vertical-align: middle;
+  vertical-align: top;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -48,6 +48,7 @@
 
 .user-detail div {
   line-height: 1.5em;
+  white-space: normal;
 }
 
 .user-detail label {
@@ -64,4 +65,20 @@
   position: relative;
   top: 2px;
   margin-right: 3px;
+}
+
+@media (max-width:768px) {
+  #user-grid {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  #user-grid li {
+    width: 98%;
+  }
+
+  #user-grid img {
+    width: 100px;
+  }
 }

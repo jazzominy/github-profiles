@@ -28,7 +28,7 @@ class UserCard extends Component {
               <span>{user.followers.totalCount}  </span>
               <label>Following: </label>
               <span>{user.following.totalCount} </span>
-              <label>Repositories: </label>
+              <label>Repos: </label>
               <span>{user.repositories.totalCount}</span>
             </div>
           </div>

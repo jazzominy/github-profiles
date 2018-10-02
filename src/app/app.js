@@ -58,7 +58,6 @@ class App extends Component {
       count = (
         <div className="result-count">
           <div className="count">Total result count: {this.state.resultCount}</div>
-          {/* <Paginator links={this.state.links} searchType={this.state.searchType}/> */}
         </div>
       );
     }
