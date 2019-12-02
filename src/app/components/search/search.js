@@ -28,7 +28,7 @@ class SearchIp extends Component {
 
   componentDidMount() {
     if (this.textIp) {
-      this.searchStream = Observable.fromEvent(this.textIp, "keypress")
+      this.searchStream = Observable.fromEvent(this.textIp, "keydown")
         .filter(e => e.key == 'Enter')
         .map(e => {
           this.params.query = e.target.value;

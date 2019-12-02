@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import "./app.css";
-import { dispatch, subscribe } from "./utils/event";
+import { subscribe } from "./utils/event";
 import { SEARCH_RESULT, NAVIGATE_SEARCH_RESULTS } from "./utils/constants";
 import UserList from "./components/user-list/user-list";
 import SearchIp from "./components/search/search";
@@ -27,13 +27,13 @@ class App extends Component {
     };
 
     this.searchIp = <SearchIp />;
-    subscribe(SEARCH_RESULT, this.onSerchResult.bind(this));
+    subscribe(SEARCH_RESULT, this.onSearchResult.bind(this));
     subscribe(NAVIGATE_SEARCH_RESULTS, this.displayPageLoader.bind(this));
   }
 
   componentDidMount() {}
 
-  onSerchResult(action) {
+  onSearchResult(action) {
     this.setState({
       items: action.payload.items,
       searchType: action.payload.searchType,
@@ -58,7 +58,7 @@ class App extends Component {
       count = (
         <div className="result-count">
           <div className="count">Total result count: {this.state.resultCount}</div>
-          {/* <Paginator links={this.state.links} searchType={this.state.searchType}/> */}
+          {<Paginator links={this.state.links} searchType={this.state.searchType}/>}
         </div>
       );
     }
