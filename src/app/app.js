@@ -3,20 +3,21 @@ import React, { Component } from "react";
 import "./app.css";
 import { subscribe } from "./utils/event";
 import { SEARCH_RESULT, NAVIGATE_SEARCH_RESULTS } from "./utils/constants";
-import UserList from "./components/user-list/user-list";
+import UserListV2 from "./components/user-list/user-list";
 import SearchIp from "./components/search/search";
 import RepoList from "./components/repo-list/repo-list";
 import Paginator from "./components/page-navigator/paginator";
 import Loader from "./components/loader/loader";
 import Notification from "./components/notification/notification";
+import { UserProvider } from "./components/context/user-context";
 
-let PageLoader = (props) => {
+let PageLoader = props => {
   return (
-    <div id="boundary" className={props.show ? 'slideUp':''}>
+    <div id="boundary" className={props.show ? "slideUp" : ""}>
       <div id="ball"></div>
     </div>
-  )
-}
+  );
+};
 
 class App extends Component {
   constructor(props) {
@@ -50,27 +51,38 @@ class App extends Component {
     if (this.state.items.length) {
       view =
         this.state.searchType == "users" ? (
-          <UserList users={this.state.items} searchType={this.state.searchType} links={this.state.links}/>
+          <UserListV2 />
         ) : (
-          <RepoList repos={this.state.items} searchType={this.state.searchType} links={this.state.links}/>
+          <RepoList
+            repos={this.state.items}
+            searchType={this.state.searchType}
+            links={this.state.links}
+          />
         );
 
       count = (
         <div className="result-count">
-          <div className="count">Total result count: {this.state.resultCount}</div>
-          {<Paginator links={this.state.links} searchType={this.state.searchType}/>}
+          <div className="count">
+            Total result count: {this.state.resultCount}
+          </div>
+          {
+            <Paginator
+              links={this.state.links}
+              searchType={this.state.searchType}
+            />
+          }
         </div>
       );
     }
 
     return (
-      <div style={{height:'100%'}}>
+      <div style={{ height: "100%" }}>
         <Notification />
         {this.searchIp}
         {count}
-        {view}
+        <UserProvider>{view}</UserProvider>
         <Loader />
-        <PageLoader show={this.state.showPageLoader}/>
+        <PageLoader show={this.state.showPageLoader} />
       </div>
     );
   }
@@ -78,7 +90,7 @@ class App extends Component {
   displayPageLoader(action) {
     this.setState({
       showPageLoader: true
-    })
+    });
   }
 }
 
