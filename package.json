@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --config webpack.config.prod.js -p",
-    "postbuild": "babel-node ./build-scripts/post-build.js --presets es2015"
+    "postbuild": "babel-node ./build-scripts/post-build.js --presets env"
   },
   "author": {
     "name": "Jasmine Hirpara"
