@@ -1,29 +1,21 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 
 import "./repo-list.css";
-import { RESET_SEARCH_RESULT } from "../../utils/constants";
-import { subscribe } from "../../utils/event";
+import { UserContext } from "../context/user-context";
 
-class RepoList extends Component {
-  uLRef;
-  subscriptions;
+const RepoListV2 = props => {
+  const { repos } = useContext(UserContext);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      fadeOut: false
-    };
-    this.subscriptions = [];
-  }
-
-  setUlRef(ref) {
-    this.uLRef = ref;
-  }
-
-  reposToLi(repos) {
+  function reposToLi(repos) {
     return repos.map(r => {
-      let starCount = r.stargazers_count > 1000 ? (r.stargazers_count/1000).toFixed(1)+'k' : r.stargazers_count;
-      let forkCount = r.forks_count > 1000 ? (r.forks_count/1000).toFixed(1)+'k' : r.forks_count;
+      let starCount =
+        r.stargazers_count > 1000
+          ? (r.stargazers_count / 1000).toFixed(1) + "k"
+          : r.stargazers_count;
+      let forkCount =
+        r.forks_count > 1000
+          ? (r.forks_count / 1000).toFixed(1) + "k"
+          : r.forks_count;
       return (
         <li key={r.id}>
           <img src={r.owner.avatar_url} />
@@ -62,32 +54,11 @@ class RepoList extends Component {
     });
   }
 
-  render() {
-    let cname = this.state.fadeOut ? "fadeOut" : "fadeIn";
-    return (
-      <div className="repo-grid-wrapper">
-        <ul id="repo-grid" className={cname} ref={this.setUlRef.bind(this)}>
-          {this.props.repos ? this.reposToLi(this.props.repos) : null}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div className="repo-grid-wrapper">
+      <ul id="repo-grid">{repos && reposToLi(repos)}</ul>
+    </div>
+  );
+};
 
-  componentDidMount() {
-    let sub = subscribe(RESET_SEARCH_RESULT, this.onReset.bind(this));
-    this.subscriptions.push(sub);
-  }
-  
-  componentWillUnmount() {
-    this.subscriptions.forEach(s => s.unsubscribe());
-  }
-
-  onReset(action) {
-    this.setState({
-      repos: [],
-      fadeOut: false
-    });
-  }  
-}
-
-export default RepoList;
+export default RepoListV2;
