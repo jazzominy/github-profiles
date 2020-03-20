@@ -5,7 +5,7 @@ import { subscribe } from "./utils/event";
 import { SEARCH_RESULT, NAVIGATE_SEARCH_RESULTS } from "./utils/constants";
 import UserListV2 from "./components/user-list/user-list";
 import SearchIp from "./components/search/search";
-import RepoList from "./components/repo-list/repo-list";
+import RepoListV2 from "./components/repo-list/repo-list";
 import Paginator from "./components/page-navigator/paginator";
 import Loader from "./components/loader/loader";
 import Notification from "./components/notification/notification";
@@ -50,15 +50,7 @@ class App extends Component {
 
     if (this.state.items.length) {
       view =
-        this.state.searchType == "users" ? (
-          <UserListV2 />
-        ) : (
-          <RepoList
-            repos={this.state.items}
-            searchType={this.state.searchType}
-            links={this.state.links}
-          />
-        );
+        this.state.searchType === "users" ? <UserListV2 /> : <RepoListV2 />;
 
       count = (
         <div className="result-count">

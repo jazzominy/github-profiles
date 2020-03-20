@@ -13,7 +13,10 @@ const subs = [];
 const UserProvider = props => {
   const [users, setUsers] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
-  useEffect(useLifeCycleEffect.bind(null, setUsers, setUserInfo), []);
+  const [repos, setRepos] = useState([]);
+
+  useEffect(useLifeCycleEffect.bind(null, setUsers, setUserInfo, setRepos), []);
+
   return (
     <Provider
       value={{
@@ -22,7 +25,8 @@ const UserProvider = props => {
         getUserInfo,
         disposeUserInfo: () => {
           setUserInfo(null);
-        }
+        },
+        repos
       }}
     >
       {props.children}
@@ -30,8 +34,11 @@ const UserProvider = props => {
   );
 };
 
-function useLifeCycleEffect(setUsers, setUserInfo) {
-  let sub = subscribe(SEARCH_RESULT, onSearchResult.bind(null, setUsers));
+function useLifeCycleEffect(setUsers, setUserInfo, setRepos) {
+  let sub = subscribe(
+    SEARCH_RESULT,
+    onSearchResult.bind(null, setUsers, setRepos)
+  );
   subs.push(sub);
   sub = subscribe(USER_INFO_RESULT, onUserInfo.bind(null, setUserInfo));
   subs.push(sub);
@@ -43,8 +50,12 @@ function useLifeCycleEffect(setUsers, setUserInfo) {
   };
 }
 
-function onSearchResult(setUsers, action) {
-  setUsers(action.payload.items);
+function onSearchResult(setUsers, setRepos, action) {
+  if (action.payload.searchType === "users") {
+    setUsers(action.payload.items);
+  } else {
+    setRepos(action.payload.items);
+  }
 }
 
 function getUserInfo({ target }) {
